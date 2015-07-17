@@ -34,6 +34,9 @@ gem 'bcrypt', '3.1.10'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3', '1.3.10'
+
   gem 'rspec-rails', '3.3.3'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -74,7 +77,7 @@ group :test do
   gem 'database_cleaner', '1.4.1'
 end
 
-group :development, :production do
+group :production do
   # PostgreSQL database
   gem 'pg', '0.18.2'
 end
