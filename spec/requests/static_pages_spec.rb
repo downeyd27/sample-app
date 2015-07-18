@@ -1,8 +1,6 @@
 require 'rails_helper'
-require 'capybara/rspec'
-require 'capybara/rails'
 
-RSpec.describe "StaticPages", type: :feature do
+RSpec.describe "StaticPages Controller", type: :feature do
   describe "Home Page" do
 
     it "should have the title 'Home'" do
