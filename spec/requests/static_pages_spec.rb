@@ -7,7 +7,7 @@ RSpec.describe "StaticPages", type: :feature do
 
     it "should have the title 'Home'" do
       visit '/static_pages/home'
-      expect(page).to have_selector('title', text: 'Home')
+      expect(page).to have_title 'Home'
     end
 
     it "should have the h1 'Home'" do
@@ -18,14 +18,14 @@ RSpec.describe "StaticPages", type: :feature do
 
   describe "Help Page" do
 
+    it "should have the title 'Help'" do
+      visit '/static_pages/help'
+      expect(page).to have_title 'Help'
+    end
+
     it "should have the h1 'Help'" do
       visit '/static_pages/help'
       expect(page).to have_selector('h1', text: 'Help')
-    end
-
-    it "should have the title 'Help'" do
-      visit '/static_pages/help'
-      expect(page).to have_selector('title', text: 'Help')
     end
   end
 
@@ -38,7 +38,7 @@ RSpec.describe "StaticPages", type: :feature do
 
     it "should have the title 'About Us'" do
       visit '/static_pages/about'
-      expect(page).to have_selector('title', text: 'About Us')
+      expect(page).to have_title 'About Us'
     end
   end
 end
