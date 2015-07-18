@@ -6,6 +6,9 @@ ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 
+# PostgreSQL database
+gem 'pg', '0.18.2'
+
 # Bootstrap
 gem 'bootstrap-sass', '3.3.5.1'
 
@@ -34,6 +37,9 @@ gem 'bcrypt', '3.1.10'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  # RSPEC for testing in rails
+  gem 'rspec-rails', '3.3.3'
+
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '1.3.10'
 
@@ -65,8 +71,6 @@ group :assets do
 end
 
 group :test do
-  # RSPEC for testing in rails
-  gem 'rspec-rails', '3.3.3'
 
   # Capybara helps you test web applications by simulating how a real user would interact with your app.
   gem 'capybara', '2.4.4'
@@ -81,8 +85,6 @@ group :test do
 end
 
 group :production do
-  # PostgreSQL database
-  gem 'pg', '0.18.2'
 
   # This gem enables serving assets in production and setting your logger to standard out, both of which are required to run a Rails 4 application on a twelve-factor provider.  Heroku recommendation.
   gem 'rails_12factor'
