@@ -37,7 +37,6 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '1.3.10'
 
-  gem 'rspec-rails', '3.3.3'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '5.0.0'
@@ -53,6 +52,7 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+
   # Use SCSS for stylesheets
   gem 'sass-rails', '5.0.3'
 
@@ -65,6 +65,9 @@ group :assets do
 end
 
 group :test do
+  # RSPEC for testing in rails
+  gem 'rspec-rails', '3.3.3'
+
   # Capybara helps you test web applications by simulating how a real user would interact with your app.
   gem 'capybara', '2.4.4'
 
