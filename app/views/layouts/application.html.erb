@@ -7,21 +7,18 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
-    <!-- Allows HTML5 elements in IE < Version 9 -->
-    <!--[if lt IE 9]>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
-    <![endif]-->
+    <%= render 'layouts/shim' %>
   </head>
   <body>
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
+    <%= render 'layouts/header' %>
     <main role="main">
       <%= render 'layouts/messages' %>
-      <%= yield %>
-      <footer>
-
-      </footer>
+      <div class="debug container">
+        <%= yield %>
+        <%= render 'layouts/footer' %>
+      </div>
     </main>
+    <!-- At bottom of page so the app will load faster -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" defer></script>
   </body>
 </html>
