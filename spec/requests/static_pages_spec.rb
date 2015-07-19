@@ -2,51 +2,39 @@ require 'rails_helper'
 
 RSpec.describe "StaticPages Controller", type: :feature do
 
+  def full_title(page_title)
+    base_title = "Project Name"
+    if page_title.empty?
+      base_title
+    else
+      "#{base_title} | #{page_title}"
+    end
+  end
+
   describe "Home Page" do
     before { visit root_path }
 
-    it "should have the title 'Home'" do
-      expect(page).to have_title 'Home'
-    end
-
-    it "should have the h1 'Home'" do
-      expect(page).to have_selector('h1', text: 'Home Page')
-    end
+    it { expect(page).to have_title full_title('')}
+    it { expect(page).to have_selector('h1', text: 'Home Page') }
   end
 
   describe "Help Page" do
     before { visit help_path }
 
-    it "should have the title 'Help'" do
-      expect(page).to have_title 'Help'
-    end
-
-    it "should have the h1 'Help'" do
-      expect(page).to have_selector('h1', text: 'Help')
-    end
+     it { expect(page).to have_title full_title('Help') }
+     it { expect(page).to have_selector('h1', text: 'Help')}
   end
 
   describe "About Page" do
     before { visit about_path }
 
-    it "should have the h1 'About Us'" do
-      expect(page).to have_selector('h1', text: 'About Us')
-    end
-
-    it "should have the title 'About Us'" do
-      expect(page).to have_title 'About Us'
-    end
+    it { expect(page).to have_title full_title('About Us') }
+    it { expect(page).to have_selector('h1', text: 'About Us')}
   end
 
   describe "Contact Page" do
     before { visit contact_path }
-
-    it "should have the h1 'Contact'" do
-      expect(page).to have_selector('h1', text: 'Contact')
-    end
-
-    it "should the title 'Contact'" do
-      expect(page).to have_title 'Contact'
-    end
+    it { expect(page).to have_title full_title('Contact') }
+    it { expect(page).to have_selector('h1', text: 'Contact')}
   end
 end
