@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "StaticPages Controller", type: :feature do
+
   describe "Home Page" do
     before { visit root_path }
 
@@ -15,6 +16,7 @@ RSpec.describe "StaticPages Controller", type: :feature do
 
   describe "Help Page" do
     before { visit help_path }
+
     it "should have the title 'Help'" do
       expect(page).to have_title 'Help'
     end
@@ -26,6 +28,7 @@ RSpec.describe "StaticPages Controller", type: :feature do
 
   describe "About Page" do
     before { visit about_path }
+
     it "should have the h1 'About Us'" do
       expect(page).to have_selector('h1', text: 'About Us')
     end
@@ -37,6 +40,7 @@ RSpec.describe "StaticPages Controller", type: :feature do
 
   describe "Contact Page" do
     before { visit contact_path }
+
     it "should have the h1 'Contact'" do
       expect(page).to have_selector('h1', text: 'Contact')
     end
