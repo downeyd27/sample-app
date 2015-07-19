@@ -10,7 +10,7 @@ RSpec.describe "StaticPages Controller", type: :feature do
 
     it "should have the h1 'Home'" do
       visit '/static_pages/home'
-      expect(page).to have_selector('h1', text: 'Home')
+      expect(page).to have_selector('h1', text: 'Home Page')
     end
   end
 
@@ -37,6 +37,18 @@ RSpec.describe "StaticPages Controller", type: :feature do
     it "should have the title 'About Us'" do
       visit '/static_pages/about'
       expect(page).to have_title 'About Us'
+    end
+  end
+
+  describe "Contact Page" do
+    it "should have the h1 'Contact'" do
+      visit '/static_pages/contact'
+      expect(page).to have_selector('h1', text: 'Contact')
+    end
+
+    it "should the title 'Contact'" do
+      visit '/static_pages/contact'
+      expect(page).to have_title 'Contact'
     end
   end
 end
