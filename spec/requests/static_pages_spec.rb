@@ -25,6 +25,7 @@ RSpec.describe "StaticPages Controller", type: :feature do
 
   describe "Contact Page" do
     before { visit contact_path }
+
     it { expect(page).to have_title full_title('Contact') }
     it { expect(page).to have_selector('h1', text: 'Contact')}
   end
