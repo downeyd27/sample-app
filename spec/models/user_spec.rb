@@ -12,5 +12,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  before { @user = User.new(name: "Test User", email: "test@user.com") }
+
+  it { expect(@user).to respond_to(:name) }
+  it { expect(@user).to respond_to(:email) }
 end
