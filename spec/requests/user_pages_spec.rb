@@ -6,8 +6,8 @@ RSpec.describe "UserPages", type: :feature do
     describe "Sign-up Page" do
       before { visit signup_path }
 
-      it { expect(page).to have_selector('h1', text: 'Sign up')}
-      it { expect(page).to have_title 'Sign up'}
+      it { expect(page).to have_selector('h1', text: 'Sign Up')}
+      it { expect(page).to have_title 'Sign Up'}
     end
   end
 end
