@@ -13,11 +13,17 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  before { @user = User.new(name: "Bobby", email: "user@test.com") }
+  before do
+    @user = User.new(name: "Example User", email: "user@test.com", password: "foobar", password_confirmation: "foobar")
+  end
+
 
   it { expect(@user).to respond_to(:name) }
   it { expect(@user).to respond_to(:email) }
   it { expect(@user).to respond_to(:password_digest) }
+  it { expect(@user).to respond_to(:password) }
+  it { expect(@user).to respond_to(:password_confirmation) }
+
   it { expect(@user).to be_valid }
 
   describe "when name is not present" do
@@ -62,6 +68,21 @@ RSpec.describe User, type: :model do
       user_with_same_email.save
     end
 
+    it { expect(@user).to_not be_valid }
+  end
+
+  describe "when password is not present" do
+    before { @user.passowrd = @user.password_confirmation = " "}
+    it { expect(@user).to_not be_valid }
+  end
+
+  describe "when password doesn't match confirmation password" do
+    before { @user.password_confirmation = "mismatch" }
+    it { expect(@user).to_not be_valid }
+  end
+
+  describe "when password_confirmation is nil" do
+    before { @user.password_confirmation = nil }
     it { expect(@user).to_not be_valid }
   end
 end
