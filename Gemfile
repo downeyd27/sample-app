@@ -40,6 +40,9 @@ group :development, :test do
   # RSPEC for testing in rails
   gem 'rspec-rails', '3.3.3'
 
+  #shoulda-matchers provides Test::Unit- and RSpec-compatible one-liners that test common Rails functionality.
+  gem 'shoulda-matchers', '~> 3.0.0.rc1'
+
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '1.3.10'
 
@@ -74,6 +77,7 @@ group :test do
 
   # Capybara helps you test web applications by simulating how a real user would interact with your app.
   gem 'capybara', '2.4.4'
+
 
   # factory_girl is a fixtures replacement with a straightforward definition syntax, support for multiple build strategies (saved instances, unsaved instances, attribute hashes, and stubbed objects), and support for multiple factories for the same class (user, admin_user, and so on), including factory inheritance.
   gem 'factory_girl_rails', '4.5.0'
