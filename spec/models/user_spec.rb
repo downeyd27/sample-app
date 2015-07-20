@@ -17,6 +17,7 @@ RSpec.describe User, type: :model do
 
   it { expect(@user).to respond_to(:name) }
   it { expect(@user).to respond_to(:email) }
+  it { expect(@user).to respond_to(:password_digest) }
   it { expect(@user).to be_valid }
 
   describe "when name is not present" do
