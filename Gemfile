@@ -89,11 +89,14 @@ group :test do
 end
 
 group :production do
-
   # This gem enables serving assets in production and setting your logger to standard out, both of which are required to run a Rails 4 application on a twelve-factor provider.  Heroku recommendation.
   gem 'rails_12factor'
 end
 
 group :development do
+  # rails_layout gem adds an updated foundation to the rails layout
   gem 'rails_layout'
+
+  # annotate provides a schema design within models
+  gem 'annotate', '2.6.10'
 end
