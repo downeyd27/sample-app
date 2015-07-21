@@ -1,0 +1,19 @@
+<%= content_for :title do %>Sign in<% end %>
+<section class="debug row">
+  <div class="col-md-6 col-md-offset-3">
+  <h1>Sign in</h1>
+    <%= form_for(:session, url: sessions_path, html: { role: 'form' }) do |f| %>
+      <div class="form_group">
+        <%= f.label :email %>
+        <%= f.text_field :email, placeholder: "e.g. BobLoblaw@gmail.com", class:"form-control" %>
+      </div>
+      <div class="form_group">
+        <%= f.label :password %>
+        <%= f.password_field :password, placeholder:"password must be longer than 6 characters", class:"form-control" %>
+      </div>
+      <div class="form_group">
+        <%= f.submit 'Sign in', class: "create_session_submit btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>
