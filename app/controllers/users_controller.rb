@@ -6,4 +6,20 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+
+  def create
+    @user = User.new(user_params)
+
+    if @user.save
+      status = 201
+      redirect_to user_path(@user)
+    else
+      status = 400
+      render 'new'
+    end
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
 end
