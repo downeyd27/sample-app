@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include ApplicationHelper
+
   def new
     @user = User.new
   end
@@ -12,7 +14,8 @@ class UsersController < ApplicationController
 
     if @user.save
       status = 201
-      redirect_to user_path(@user)
+      flash[:success] = "Welcome to #{base_title} App!"
+      redirect_to @user
     else
       status = 400
       render 'new'
