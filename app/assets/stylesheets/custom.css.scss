@@ -1,4 +1,5 @@
 @import "bootstrap";
+
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
@@ -23,7 +24,7 @@ $grayMediumLight: #eaeaea;
   outline: 1px solid red;
 }
 
-/* Universal */
+/* universal */
 
 html {
   overflow-y: scroll;
@@ -59,7 +60,7 @@ main {
   display: inline;
 }
 
-/* Typography */
+/* typography */
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
@@ -86,7 +87,7 @@ p {
   line-height: 1.7em;
 }
 
-/* Header */
+/* header */
 
 #logo {
   float: left;
@@ -133,7 +134,27 @@ aside {
   float: left;
   margin-right: 10px;
 }
-/*Footer*/
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+.create_user_submit {
+  float: left;
+  width: 25%;
+}
+
+/*footer*/
 
 footer {
   ul {
