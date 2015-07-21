@@ -149,7 +149,8 @@ input {
   height: auto !important;
 }
 
-.create_user_submit {
+.create_user_submit,
+.create_session_submit {
   float: left;
   width: 25%;
 }
@@ -159,6 +160,33 @@ input {
   ul {
     list-style: none;
     margin: 0 0 18px 0;
+  }
+}
+
+.flash-message {
+  color: black;
+  z-index: 999;
+  /*position: fixed;*/
+  font-weight: bold;
+  width: 96%;
+  margin: 20px;
+
+  .flash_error {
+    border: solid 4px #900;
+    background-color: #FF6565;
+  }
+
+  .flash_success {
+    border: solid 4px #26722D;
+    background-color: #A4E7A0;
+  }
+
+  .flash_notice {
+    /* need to fill in border and background color for flash notice */
+  }
+  p {
+    font-size: 110%;
+    margin: 15px 0;
   }
 }
 
