@@ -15,9 +15,9 @@ RSpec.describe "User pages", type: :feature do
     describe "with valid information" do
       before do
         fill_in "Name", with: "Test User"
-        fill_in "email", with: "test@user.com"
+        fill_in "Email", with: "test@user.com"
         fill_in "Password", with: "foobar"
-        fill_in "Password_confirmation", with: "foobar"
+        fill_in "Password Confirmation", with: "foobar"
       end
 
       it "should create user" do
