@@ -14,6 +14,6 @@ RSpec.describe "User pages", type: :feature do
     before { visit user_path(user) }
 
     it { expect(page).to have_title user.name }
-    it { expect(page).to have_selector('h1', text: 'user.name') }
+    it { expect(page).to have_selector('h1', text: user.name) }
   end
 end
