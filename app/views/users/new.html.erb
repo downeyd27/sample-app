@@ -22,7 +22,9 @@
           <%= f.label :password_confirmation, "Password Confirmation" %>
           <%= f.password_field :password_confirmation, placeholder:"password must be longer than 6 characters", class:"form-control" %>
         </div>
-        <%= f.submit "Create my account", class: "create_user_submit btn btn-primary" %>
+        <div class="form_group">
+          <%= f.submit "Create my account", class: "create_user_submit btn btn-primary" %>
+        </div>
       <% end %>
     </section>
   </div>
