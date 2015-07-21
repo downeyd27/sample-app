@@ -1,6 +1,7 @@
 <%= content_for :title do %><%= @user.name %><% end %>
 <section class="debug">
   <h1>
+    <%= gravatar_for @user %>
     <%= @user.name %>
   </h1>
   <%= @user.name %>, <%= @user.email %>
