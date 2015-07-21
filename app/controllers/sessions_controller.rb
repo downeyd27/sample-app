@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       redirect_to user_path(user)
     else
       status = 400
-      flash[:error] = "Invalid signin credentials.  You were not signed in!"
+      flash[:error] = "Invalid email/password combination.  You were not signed in!"
       render 'new'
     end
   end
