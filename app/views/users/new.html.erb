@@ -5,21 +5,22 @@
       <h1>Sign Up</h1>
       <p>Here you can signup for this amazing application!</p>
       <%= form_for @user, html: { role: "form" } do |f| %>
+      <%= render 'shared/error_messages' %>
         <div class="form_group">
           <%= f.label :name %>
-          <%= f.text_field :name, class:"form-control" %>
+          <%= f.text_field :name, placeholder: "e.g. Bob Loblaw", class:"form-control" %>
         </div>
         <div class="form_group">
           <%= f.label :email %>
-          <%= f.text_field :email, class:"form-control" %>
+          <%= f.text_field :email, placeholder: "e.g. BobLoblaw@gmail.com", class:"form-control" %>
         </div>
         <div class="form_group">
           <%= f.label :password %>
-          <%= f.password_field :password, class:"form-control" %>
+          <%= f.password_field :password, placeholder:"password must be longer than 6 characters", class:"form-control" %>
         </div>
         <div class="form_group">
           <%= f.label :password_confirmation, "Password Confirmation" %>
-          <%= f.password_field :password_confirmation, class:"form-control" %>
+          <%= f.password_field :password_confirmation, placeholder:"password must be longer than 6 characters", class:"form-control" %>
         </div>
         <%= f.submit "Create my account", class: "create_user_submit btn btn-primary" %>
       <% end %>
