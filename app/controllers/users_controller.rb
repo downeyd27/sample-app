@@ -14,10 +14,13 @@ class UsersController < ApplicationController
 
     if @user.save
       status = 201
+      # may need to make test for checking if flash success occurs
       flash[:success] = "Welcome to #{base_title} App!"
       redirect_to @user
     else
       status = 400
+      # may need to make test for checking if flash error occurs
+      flash[:error] = "Invalid credentials for creating an account!"
       render 'new'
     end
   end
