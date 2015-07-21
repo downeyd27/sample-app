@@ -10,6 +10,13 @@ RSpec.describe "User pages", type: :feature do
       it "should not create user" do
         expect { click_button submit }.not_to change(User, :count)
       end
+
+      describe "after submission" do
+        before { click_button submit }
+
+        it { expect(page).to have_title 'Sign Up' }
+        it { expect(page).to have_content('error') }
+      end
     end
 
     describe "with valid information" do
