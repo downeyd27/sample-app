@@ -1,8 +1,12 @@
 <%= content_for :title do %><%= @user.name %><% end %>
-<section class="debug">
-  <h1>
-    <%= gravatar_for @user %>
-    <%= @user.name %>
-  </h1>
-  <%= @user.name %>, <%= @user.email %>
-</section>
+<div class="row">
+  <aside class="debug col-md-4">
+    <section>
+    <h1>
+      <%= gravatar_for @user %>
+      <%= @user.name %>
+    </h1>
+    <%= @user.name %>, <%= @user.email %>
+    </section>
+  </aside>
+</div>
