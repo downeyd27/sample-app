@@ -15,13 +15,21 @@ RSpec.describe "User pages", type: :feature do
     describe "with valid information" do
       before do
         fill_in "Name", with: "Test User"
-        fill_in "Email", with: "test@user.com"
+        fill_in "Email", with: "user@example.com"
         fill_in "Password", with: "foobar"
         fill_in "Password Confirmation", with: "foobar"
       end
 
       it "should create user" do
         expect { click_button submit }.to change(User, :count).by(1)
+      end
+
+      describe "after saving the user" do
+        before { click_button submit }
+        let(:user) { User.find_by_email('user@example.com') }
+
+        it { expect(page).to have_title user.name }
+        it { expect(page).to have_selector('div.alert.alert-success', text: 'Welcome') }
       end
     end
 
