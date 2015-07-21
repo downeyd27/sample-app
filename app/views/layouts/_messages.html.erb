@@ -1,4 +1,4 @@
-<div class="center flash-message">
+<div class="center alert flash-message">
   <% flash.each do |name, msg| %>
     <% if msg.is_a?(String) %>
       <%= content_tag :p, msg, class: "flash_#{name}" %>
