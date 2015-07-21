@@ -1,5 +1,5 @@
-<%= content_for :title do %>Profile Page<% end %>
+<%= content_for :title do %><%= @user.name %><% end %>
 <section class="debug">
-  <h1>Profile Page</h1>
+  <h1>@user.name</h1>
   <%= @user.name %>, <%= @user.email %>
 </section>
