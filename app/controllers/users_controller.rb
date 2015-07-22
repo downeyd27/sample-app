@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 
     if @user.save
       status = 201
+
       # may need to make test for checking if flash success occurs
       flash[:success] = "Welcome to #{base_title} App!"
       redirect_to @user
@@ -25,7 +26,9 @@ class UsersController < ApplicationController
     end
   end
 
+  private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
+
 end
