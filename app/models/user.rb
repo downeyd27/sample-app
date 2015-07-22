@@ -10,6 +10,7 @@
 #  password_digest       :string
 #  password              :string
 #  password_confirmation :string
+#  remember_token        :string
 #
 
 class User < ActiveRecord::Base
