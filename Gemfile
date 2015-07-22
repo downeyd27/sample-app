@@ -40,6 +40,7 @@ group :development, :test do
   # RSPEC for testing in rails
   gem 'rspec-rails', '3.3.3'
 
+  # Adds rspec method its back which was removed in RSpec 3.0
   gem 'rspec-its'
 
   #shoulda-matchers provides Test::Unit- and RSpec-compatible one-liners that test common Rails functionality.
