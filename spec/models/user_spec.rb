@@ -17,9 +17,13 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   before do
-    @user = User.new(name: "Example User", email: "user@test.com", password: "foobar", password_confirmation: "foobar")
+    @user = User.new( name: "Example User",
+                      email: "user@test.com",
+                      password: "foobar",
+                      password_confirmation: "foobar",
+                      remember_token: "foobar"
+    )
   end
-
 
   it { expect(@user).to respond_to(:name) }
   it { expect(@user).to respond_to(:email) }
@@ -27,6 +31,7 @@ RSpec.describe User, type: :model do
   it { expect(@user).to respond_to(:password) }
   it { expect(@user).to respond_to(:password_confirmation) }
   it { expect(@user).to respond_to(:authenticate) }
+  it { expect(@user).to respond_to(:remember_token) }
 
   it { expect(@user).to be_valid }
 
@@ -121,5 +126,10 @@ RSpec.describe User, type: :model do
       specify { expect(user_for_invalid_password).to be_falsey }
     end
 
+    describe "remember token" do
+      before { @user.save }
+      its(:remember_token).to_not be_empty
+      # it { expect(@user.remeber_token).to_not be_blank }
+    end
   end
 end
