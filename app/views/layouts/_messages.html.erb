@@ -1,7 +1,7 @@
 <div class="center alert flash-message">
   <% flash.each do |name, msg| %>
     <% if msg.is_a?(String) %>
-      <%= content_tag :p, msg, class: "flash_#{name}" %>
+      <%= content_tag(:div, msg, class: "alert alert-#{name} flash_#{name}") %>
     <% end %>
   <% end %>
 </div>
