@@ -2,11 +2,15 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  email      :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                    :integer          not null, primary key
+#  name                  :string
+#  email                 :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  password_digest       :string
+#  password              :string
+#  password_confirmation :string
+#  remember_token        :string
 #
 
 require 'rails_helper'
@@ -14,9 +18,15 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   before do
-    @user = User.new(name: "Example User", email: "user@test.com", password: "foobar", password_confirmation: "foobar")
+   @user = User.new( name: "Example User",
+                      email: "user@test.com",
+                      password: "foobar",
+                      password_confirmation: "foobar",
+                      remember_token: "test_token"
+    )
   end
 
+  subject { @user }
 
   it { expect(@user).to respond_to(:name) }
   it { expect(@user).to respond_to(:email) }
@@ -24,6 +34,7 @@ RSpec.describe User, type: :model do
   it { expect(@user).to respond_to(:password) }
   it { expect(@user).to respond_to(:password_confirmation) }
   it { expect(@user).to respond_to(:authenticate) }
+  # it { expect(@user).to respond_to(:remember_token) }
 
   it { expect(@user).to be_valid }
 
@@ -118,5 +129,14 @@ RSpec.describe User, type: :model do
       specify { expect(user_for_invalid_password).to be_falsey }
     end
 
+    describe "remember token" do
+      let(:user) { FactoryGirl.create(:user) }
+      before { user.save }
+  # I think this test is faulty.  It passes even before factory girl had field for remember_token
+  # and when commenting out @user at top before usering factory girl. Also, after commenting out
+  # the callback in the user model the test passes.
+  # Failed test (changing to_not into to) does show "Test Token" is being tested.
+      it { expect(user.remember_token).to_not be_empty }
+    end
   end
 end
