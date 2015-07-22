@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "AuthenticationPages", type: :feature do
+  let(:user) { FactoryGirl.create(:user) }
 
   describe 'signin page' do
     before { visit signin_path }
@@ -25,7 +26,6 @@ RSpec.describe "AuthenticationPages", type: :feature do
 
 
     describe "with valid information" do
-      let(:user) { FactoryGirl.create(:user) }
       before do
         fill_in "Email",    with: user.email.upcase # upcase so that we make sure use in database is case-insensitive
         fill_in "Password", with: user.password
