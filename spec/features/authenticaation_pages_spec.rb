@@ -8,6 +8,7 @@ RSpec.describe "Authentication", type: :feature do
 
     it { expect(page).to have_title 'Sign in' }
     it { expect(page).to have_selector( 'h1', text: 'Sign in') }
+    it { expect(page).to have_link('Sign up now!', href: signup_path) }
 
     describe "with valid information" do
       let(:user) { FactoryGirl.create(:user) }
@@ -18,14 +19,15 @@ RSpec.describe "Authentication", type: :feature do
       end
 
       it { expect(page).to have_title user.name }
+      it { expect(page).to have_selector('div.alert.alert-success', text: 'Valid') }
       it { expect(page).to have_link('Profile', href: user_path(user)) }
       it { expect(page).to have_link('Sign out', href: signout_path) }
       it { expect(page).to_not have_link('Sign in', href: signin_path) }
 
+
       describe "followed by signout" do
         before { click_link "Sign out" }
 
-      # it { expect(page).to have_selector('div.alert.alert-success', text: 'Valid') }
         it { expect(page).to have_link('Sign in') }
       end
     end
@@ -41,7 +43,6 @@ RSpec.describe "Authentication", type: :feature do
 
         it { expect(page).to_not have_selector('div.alert.alert-error') }
       end
-
     end
   end
 end
