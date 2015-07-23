@@ -1,5 +1,5 @@
 module SessionsHelper
-  def sign_in
+  def sign_in(user)
     cookies.permanent[:remember_token] = user.remember_token
     # Next line not necessary for sign_in method in a route with redirect_to,
     # but a good idea incase used without a redirect
@@ -16,5 +16,10 @@ module SessionsHelper
 
   def current_user
     @current_user ||= User.find_by_remember_token(cookies[:remember_token])
+  end
+
+  def sign_out
+    self.current_user = nil
+    cookies.delete(:remember_token)
   end
 end

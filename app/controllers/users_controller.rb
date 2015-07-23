@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
     if @user.save
       status = 201
-
+      sign_in @user
       # may need to make test for checking if flash success occurs
       flash[:success] = "Welcome to #{base_title} App!"
       redirect_to @user
