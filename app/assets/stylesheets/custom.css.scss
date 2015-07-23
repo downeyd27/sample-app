@@ -166,6 +166,7 @@ input {
 }
 
 .flash-message {
+  font-size: 2.5em;
   color: black;
   z-index: 999;
   /*position: fixed;*/
@@ -184,6 +185,8 @@ input {
   }
 
   .flash_notice {
+    border: solid 4px;
+    background-color: #f8f99d;
     /* need to fill in border and background color for flash notice */
   }
   p {
