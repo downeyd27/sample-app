@@ -7,5 +7,10 @@ def sign_in(user)
   fill_in 'Password', with: user.password
   click_button 'Sign in'
   # Sign in when not using Capybara as well.
-  cookies[:remember_token] = user.remember_token
+  #
+  # COMMENT COOKIES BACK IN BEFORE PRODUCTION AND DEVELOPEMENT.
+  #
+  # Test suite doesn't recognize method cookie.
+  # Comment out during testing
+  # cookies[:remember_token] = user.remember_token
 end
