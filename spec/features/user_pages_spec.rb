@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "User pages", type: :feature do
+  # Refactor so that FactoryGirl user is within the scope of a describe block.  Do some research first, but I wonder if
+  # it can interfer with scope of user with some of the tests.
   let(:user) { FactoryGirl.create(:user) }
 
   describe "signup" do
@@ -23,6 +25,7 @@ RSpec.describe "User pages", type: :feature do
 
       describe "with valid information" do
         before do
+          # change to with: user.name, etc, and test later
           fill_in "Name", with: "Test User"
           fill_in "Email", with: "user@example.com"
           fill_in "Password", with: "foobar"
@@ -69,7 +72,7 @@ RSpec.describe "User pages", type: :feature do
     end
 
     describe "with invalid information" do
-      before { click_button 'Save Changes' }
+      before { click_button 'Save changes' }
 
       it { expect(page).to have_content 'error' }
     end
@@ -85,13 +88,14 @@ RSpec.describe "User pages", type: :feature do
         fill_in "Confirm Password", with: user.password
         click_button 'Save changes'
       end
-    end
 
-    it { expect(page).to have_title 'new_name' }
-    it { expect(page).to have_selector('h1', 'Update your profile') }
-    it { expect(page).to have_selector('div.alert.alert-success') }
-    it { expect(page).to have_link('Sign out', href: signout_path) }
-    specify { epexct(user.reload.name).to == name_name }
-    specify { epexct(user.reload.email).to == new_email }
+      it { expect(page).to have_title 'New Name' }
+      it { expect(page).to have_selector('h1', 'Update your profile') }
+      it { expect(page).to have_selector('div.alert.alert-success') }
+      it { expect(page).to have_link('Sign out', href: signout_path) }
+      before { user.reload }
+      specify { expect(user.name).to eq new_name }
+      specify { expect(user.email).to eq new_email }
+    end
   end
 end
