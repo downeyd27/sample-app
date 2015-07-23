@@ -5,6 +5,24 @@ RSpec.describe "User pages", type: :feature do
   # it can interfer with scope of user with some of the tests.
   let(:user) { FactoryGirl.create(:user) }
 
+  describe "index" do
+    before do
+      sign_in FactoryGirl.create(:user)
+      FactoryGirl.create(:user, name: "bob", email: "bob@example.com")
+      FactoryGirl.create(:user, name: "joe", email: "joe@example.com")
+      visit users_path
+    end
+
+    it { expect(page).to have_title 'All users' }
+    it { expect(page).to have_selector('h1', text: 'All users') }
+
+    it "should list each user" do
+      User.all.each do |user|
+        expect(page).to have_selector('li', text: user.name)
+      end
+    end
+  end
+
   describe "signup" do
     before { visit signup_path }
     let(:submit) { "Create my account"}
