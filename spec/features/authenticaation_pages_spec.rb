@@ -29,6 +29,7 @@ RSpec.describe "Authentication", type: :feature do
         before { click_link "Sign out" }
 
         it { expect(page).to have_link('Sign in') }
+        it { expect(page).to have_selector('div.alert.alert-success', text: "Logged out!")}
       end
     end
 
