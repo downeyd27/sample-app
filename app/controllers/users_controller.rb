@@ -31,7 +31,12 @@ class UsersController < ApplicationController
   end
 
   def update
-
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      # Take care of happy path
+    else
+      render 'edit'
+    end
   end
 
   private
