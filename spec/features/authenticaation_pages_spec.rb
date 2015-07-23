@@ -21,6 +21,7 @@ RSpec.describe "Authentication", type: :feature do
       it { expect(page).to have_title user.name }
       it { expect(page).to have_selector('div.alert.alert-success', text: 'Valid') }
       it { expect(page).to have_link('Profile', href: user_path(user)) }
+      it { expect(page).to have_link('Settings', href: edit_user_path(user)) }
       it { expect(page).to have_link('Sign out', href: signout_path) }
       it { expect(page).to_not have_link('Sign in', href: signin_path) }
 
