@@ -57,9 +57,10 @@ RSpec.describe "Authentication", type: :feature do
             before { visit edit_user_path(user) }
             it { expect(page).to have_title 'Sign in' }
           end
-          # test is within spec/feature/user_pages_spec.rb
+          # tests are within spec/feature/user_pages_spec.rb
           # Rspec test needs to be of type :request for put
           # action to be defined
+
           # describe "submitting to the update action" do
           #   # undefined method put error
           #   before { put user_path(user) }
@@ -68,9 +69,23 @@ RSpec.describe "Authentication", type: :feature do
         end
       end
 
-      # describe "for signed in users" do
-      #   visiting
-      # end
+      describe "as wrong user" do
+        let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
+        before { sign_in user }
+
+        describe "visiting Users#edit page" do
+          before { visit edit_user_path(wrong_user) }
+          it { expect(page).to_not have_title 'Edit page' }
+        end
+        #
+        # TEST NOT WORKING BECAUSE FEATURE FILE DOENS'T LIKE put method
+        # describe "as a wrong user submitting a PUT request to the Users#update action" do
+        #   let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
+        #   before { sign_in user }
+        #   before { put edit_user_path(wrong_user) }
+        #   it { expects(response).to redirect_to(root_url) }
+        # end
+      end
     end
   end
 end
