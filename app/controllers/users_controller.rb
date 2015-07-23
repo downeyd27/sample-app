@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include ApplicationHelper
+  before_filter :signed_in_user, only: [:edit, :update]
 
   def new
     @user = User.new
@@ -48,6 +49,10 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def signed_in_user
+      redirect_to signin_url, notice: "Please sign in." unless signed_in?
     end
   # End of private methods.
 end
