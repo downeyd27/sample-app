@@ -33,8 +33,13 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      # Take care of happy path
+      status = 201
+      flash[:success] = "Profile updated"
+      sign_in @user
+      redirect_to @user
     else
+      status = 400
+      # flash[:error] = "Invalid user update submission "write tests before uncommenting.
       render 'edit'
     end
   end
