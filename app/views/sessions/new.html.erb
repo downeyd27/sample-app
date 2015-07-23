@@ -13,7 +13,9 @@
       </div>
       <div class="form_group">
         <%= f.submit 'Sign in', class: "create_session_submit btn btn-primary" %>
+        <p class="new_user">New user? <%= link_to 'Sign up now!', signup_path %></p>
       </div>
     <% end %>
+
   </div>
 </section>
