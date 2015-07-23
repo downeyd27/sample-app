@@ -57,14 +57,20 @@ RSpec.describe "Authentication", type: :feature do
             before { visit edit_user_path(user) }
             it { expect(page).to have_title 'Sign in' }
           end
-
-          describe "submitting to the update action" do
-            # undefined method put error
-            before { put user_path(user) }
-            it { expect(response).to redirect_to(signin_path) }
-          end
+          # test is within spec/feature/user_pages_spec.rb
+          # Rspec test needs to be of type :request for put
+          # action to be defined
+          # describe "submitting to the update action" do
+          #   # undefined method put error
+          #   before { put user_path(user) }
+          #   it { expect(response).to redirect_to(signin_path) }
+          # end
         end
       end
+
+      # describe "for signed in users" do
+      #   visiting
+      # end
     end
   end
 end
