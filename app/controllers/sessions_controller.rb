@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       sign_in user
       status = 201
       flash[:success] = "Valid signin credentials.  You just signed in!"
-      redirect_to user_path(user)
+      redirect_back_or user
     else
       status = 400
       flash.now[:error] = "Invalid email/password combination.  You were not signed in!"
