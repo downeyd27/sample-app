@@ -49,12 +49,29 @@ RSpec.describe "Authentication", type: :feature do
 
     describe "authorization" do
 
-      describe "for non-sign-in users" do
+      describe "for non-signed-in users" do
+
+        describe "when attempting to visit a protected page" do
+          before do
+            visit edit_user_path(user)
+            fill_in "Email", with: user.email
+            fill_in "Password", with: user.password
+            click_button 'Sign in'
+          end
+
+          describe "after signing in" do
+
+            it "should render the desired protected page" do
+              expect(page).to have_title 'Edit user'
+            end
+          end
+        end
 
         describe "in the Users controller" do
 
           describe "visiting the edit page" do
             before { visit edit_user_path(user) }
+
             it { expect(page).to have_title 'Sign in' }
           end
           # tests are within spec/feature/user_pages_spec.rb
@@ -75,6 +92,7 @@ RSpec.describe "Authentication", type: :feature do
 
         describe "visiting Users#edit page" do
           before { visit edit_user_path(wrong_user) }
+
           it { expect(page).to_not have_title 'Edit page' }
         end
         #
