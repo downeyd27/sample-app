@@ -100,6 +100,7 @@ group :development do
   # rails_layout gem adds an updated foundation to the rails layout
   gem 'rails_layout'
 
+  gem 'pry-rails'
   # annotate provides a schema design within models
   gem 'annotate', '2.6.10'
 end
