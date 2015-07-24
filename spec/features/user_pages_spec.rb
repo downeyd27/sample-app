@@ -21,7 +21,7 @@ RSpec.describe "User pages", type: :feature do
      before(:all) { 30.times { FactoryGirl.create(:user) } }
      after(:all)  { User.delete_all }
 
-     it { expect(page).to have_selector('div.pagination') }
+     it { expect(page).to have_selector('ul.pagination') }
 
       it "should list each user" do
         User.paginate(page: 1).each do |user|
