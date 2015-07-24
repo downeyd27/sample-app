@@ -42,7 +42,7 @@ RSpec.describe "UserPages", type: :request do
       #
       describe "as a wrong user submitting a PUT request to the Users#update action" do
         let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
-        before { sign_in user }
+        before { sign_in user, no_capybara: true }
         before { put edit_user_path(wrong_user) }
         it { expects(response).to redirect_to(root_url) }
       end
