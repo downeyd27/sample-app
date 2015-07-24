@@ -6,19 +6,27 @@ RSpec.describe "User pages", type: :feature do
   let(:user) { FactoryGirl.create(:user) }
 
   describe "index" do
-    before do
-      sign_in FactoryGirl.create(:user)
-      FactoryGirl.create(:user, name: "bob", email: "bob@example.com")
-      FactoryGirl.create(:user, name: "joe", email: "joe@example.com")
+    let(:user) { FactoryGirl.create(:user) }
+
+    before(:each) do
+      sign_in user
       visit users_path
     end
 
     it { expect(page).to have_title 'All users' }
     it { expect(page).to have_selector('h1', text: 'All users') }
 
-    it "should list each user" do
-      User.all.each do |user|
-        expect(page).to have_selector('li', text: user.name)
+    describe "pagination" do
+
+     before(:all) { 30.times { FactoryGirl.create(:user) } }
+     after(:all)  { User.delete_all }
+
+     it { expect(page).to have_selector('div.pagination') }
+
+      it "should list each user" do
+        User.paginate(page: 1).each do |user|
+          expect(page).to have_selector('li', text: user.name)
+        end
       end
     end
   end
