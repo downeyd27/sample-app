@@ -87,8 +87,8 @@ RSpec.describe "Authentication", type: :feature do
 
           # describe "submitting to the update action" do
           #   # undefined method put error
-          #   before { put user_path(user) }
-          #   it { expect(response).to redirect_to(signin_path) }
+          # before { put user_path(user) }
+          # it { expect(response).to redirect_to(signin_path) }
           # end
         end
       end
@@ -102,14 +102,6 @@ RSpec.describe "Authentication", type: :feature do
 
           it { expect(page).to_not have_title 'Edit page' }
         end
-        #
-        # TEST NOT WORKING BECAUSE FEATURE FILE DOENS'T LIKE put method
-        # describe "as a wrong user submitting a PUT request to the Users#update action" do
-        #   let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
-        #   before { sign_in user }
-        #   before { put edit_user_path(wrong_user) }
-        #   it { expects(response).to redirect_to(root_url) }
-        # end
       end
     end
   end
