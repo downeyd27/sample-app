@@ -9,9 +9,16 @@ gem 'rails', '4.2.3'
 # PostgreSQL database
 gem 'pg', '0.18.2'
 
-# Bootstrap
+# Bootstrap Sass style
 gem 'bootstrap-sass', '3.3.5.1'
 
+# Allows you to control how many of a list is displayed.
+# If you don't want to see all 1000 users on your users index
+# page this may be useful
+gem 'will_paginate'
+
+# allows bootstrap to pagination
+gem 'will_paginate-bootstrap'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
