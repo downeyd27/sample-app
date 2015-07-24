@@ -18,10 +18,10 @@ RSpec.describe "User pages", type: :feature do
 
     describe "pagination" do
 
-     before(:all) { 30.times { FactoryGirl.create(:user) } }
-     after(:all)  { User.delete_all }
+      before(:all) { 30.times { FactoryGirl.create(:user) }}
+      after(:all)  { User.delete_all }
 
-     it { expect(page).to have_selector('ul.pagination') }
+      it { expect(page).to have_selector('ul.pagination') }
 
       it "should list each user" do
         User.paginate(page: 1).each do |user|
@@ -29,20 +29,53 @@ RSpec.describe "User pages", type: :feature do
         end
       end
     end
+    #
+    #
+    #
+    # Left off on delete links.... something is broken. expecting key
+    #
+    #
+    #
+    #
+    #
+    # describe "delete links" do
+
+    #   it { expect(page).to_not have_link 'delete' }
+
+    #   describe "as an admin user" do
+
+    #     let(:admin) { FactoryGirl.create(:admin) }
+    #     before do
+    #       sign_in admin
+    #       visit users_path
+    #     end
+
+    #     it { expect(page).to have_link('delete', href: user_path(User.first)) }
+
+    #     it "should be able to delete another user" do
+    #       expect { click_link('delete') }.to change(User, :count).by(-1) }
+    #     end
+
+    #     it { expect(page).not_to have_link('delete', href: user_path(admin)) }
+    #   end
+    # end
   end
 
   describe "signup" do
+
     before { visit signup_path }
     let(:submit) { "Create my account"}
 
     describe "page" do
 
       describe "with invalid information" do
+
         it "should not create user" do
           expect { click_button submit }.not_to change(User, :count)
         end
 
         describe "after submission" do
+
           before { click_button submit }
 
           it { expect(page).to have_title 'Sign Up' }
@@ -51,6 +84,7 @@ RSpec.describe "User pages", type: :feature do
       end
 
       describe "with valid information" do
+
         before do
           # change to with: user.name, etc, and test later
           fill_in "Name", with: "Test User"
@@ -64,6 +98,7 @@ RSpec.describe "User pages", type: :feature do
         end
 
         describe "after saving the user" do
+
           before { click_button submit }
           let(:user) { User.find_by_email('user@example.com') }
 
@@ -78,6 +113,7 @@ RSpec.describe "User pages", type: :feature do
   end
 
   describe "profile" do
+
     before { visit user_path(user) }
 
     describe "page" do
@@ -87,24 +123,27 @@ RSpec.describe "User pages", type: :feature do
   end
 
   describe "edit" do
+
     before do
       sign_in user
       visit edit_user_path(user)
     end
 
     describe "page" do
+
       it { expect(page).to have_title 'Edit user' }
       it { expect(page).to have_selector('h1', text: 'Update your profile') }
       it { expect(page).to have_link('change', href: 'https://gravatar.com/emails') }
     end
 
     describe "with invalid information" do
-      before { click_button 'Save changes' }
 
+      before { click_button 'Save changes' }
       it { expect(page).to have_content 'error' }
     end
 
     describe "with valid information" do
+
       let(:new_name) { 'New Name' }
       let(:new_email) { 'new@example.com' }
 
@@ -120,7 +159,9 @@ RSpec.describe "User pages", type: :feature do
       it { expect(page).to have_selector('h1', 'Update your profile') }
       it { expect(page).to have_selector('div.alert.alert-success') }
       it { expect(page).to have_link('Sign out', href: signout_path) }
+
       before { user.reload }
+
       specify { expect(user.name).to eq new_name }
       specify { expect(user.email).to eq new_email }
     end
