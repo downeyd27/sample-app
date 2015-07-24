@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Authentication", type: :feature do
+RSpec.describe "AuthenticationPages", type: :feature do
   let(:user) { FactoryGirl.create(:user) }
 
   describe 'signin page' do
@@ -47,61 +47,77 @@ RSpec.describe "Authentication", type: :feature do
         it { expect(page).to_not have_selector('div.alert.alert-error') }
       end
     end
+  end
 
-    describe "authorization" do
+  describe "authorization" do
+    # moved to authenticatio pages type requests
 
-      describe "for non-signed-in users" do
+    # describe "as non-admin user" do
+    #   let(:user) { FactoryGirl.create(:user) }
+    #   let(:non_admin) { FactoryGirl.create(:user) }
 
-        describe "when attempting to visit a protected page" do
-          before do
-            visit edit_user_path(user)
-            fill_in "Email", with: user.email
-            fill_in "Password", with: user.password
-            click_button 'Sign in'
-          end
+    #   before { sign_in non_admin }
 
-          describe "after signing in" do
+    #   describe "submitting a DELETE requesst to the Users#destroy action" do
+    #     before { delete user_path(user) }
+    #     it { expect(page).to redirect_to root_url }
+    #   end
+    # end
 
-            it "should render the desired protected page" do
-              expect(page).to have_title 'Edit user'
-            end
-          end
+    describe "for non-signed-in users" do
+
+      it { expect(page).to_not have_link 'Profile' }
+      it { expect(page).to_not have_link 'Settings' }
+
+      describe "when attempting to visit a protected page" do
+        before do
+          visit edit_user_path(user)
+          fill_in "Email", with: user.email
+          fill_in "Password", with: user.password
+          click_button 'Sign in'
         end
 
-        describe "in the Users controller" do
+        describe "after signing in" do
 
-          describe "visiting the edit page" do
-            before { visit edit_user_path(user) }
-
-            it { expect(page).to have_title 'Sign in' }
+          it "should render the desired protected page" do
+            expect(page).to have_title 'Edit user'
           end
-
-          describe "visiting the user index" do
-            before { visit users_path }
-
-            it { expect(page).to have_title 'Sign in' }
-          end
-          # tests are within spec/feature/user_pages_spec.rb
-          # Rspec test needs to be of type :request for put
-          # action to be defined
-
-          # describe "submitting to the update action" do
-          #   # undefined method put error
-          # before { put user_path(user) }
-          # it { expect(response).to redirect_to(signin_path) }
-          # end
         end
       end
 
-      describe "as wrong user" do
-        let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
-        before { sign_in user }
+      describe "in the Users controller" do
 
-        describe "visiting Users#edit page" do
-          before { visit edit_user_path(wrong_user) }
+        describe "visiting the edit page" do
+          before { visit edit_user_path(user) }
 
-          it { expect(page).to_not have_title 'Edit page' }
+          it { expect(page).to have_title 'Sign in' }
         end
+
+        describe "visiting the user index" do
+          before { visit users_path }
+
+          it { expect(page).to have_title 'Sign in' }
+        end
+        # tests are within spec/feature/user_pages_spec.rb
+        # Rspec test needs to be of type :request for put
+        # action to be defined
+
+        # describe "submitting to the update action" do
+        #   # undefined method put error
+        # before { put user_path(user) }
+        # it { expect(response).to redirect_to(signin_path) }
+        # end
+      end
+    end
+
+    describe "as wrong user" do
+      let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
+      before { sign_in user }
+
+      describe "visiting Users#edit page" do
+        before { visit edit_user_path(wrong_user) }
+
+        it { expect(page).to_not have_title 'Edit page' }
       end
     end
   end
