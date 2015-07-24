@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   include ApplicationHelper
-  before_filter :signed_in_user, only: [:index, :edit, :update]
+  before_filter :signed_in_user, only: [:index, :edit, :update, :delete]
   before_filter :correct_user,   only: [:edit, :update]
+  before_filter :admin_user,   only: [:delete]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -44,9 +45,17 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       status = 400
-      # flash[:error] = "Invalid user update submission "write tests before uncommenting.
+      # need to write tests
+      flash[:error] = "Invalid user update submission"
       render 'edit'
     end
+  end
+
+  def destroy
+    User.find(params[:id]).destroy
+    # Need to write tests
+    flash[:success] = "user destroyed."
+    redirect_to users_url
   end
 
   private
@@ -63,6 +72,10 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
   # End of private methods.
 end
