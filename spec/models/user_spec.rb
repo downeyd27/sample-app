@@ -26,17 +26,26 @@ RSpec.describe User, type: :model do
     )
   end
 
-  subject { @user }
-
   it { expect(@user).to respond_to(:name) }
   it { expect(@user).to respond_to(:email) }
   it { expect(@user).to respond_to(:password_digest) }
   it { expect(@user).to respond_to(:password) }
   it { expect(@user).to respond_to(:password_confirmation) }
   it { expect(@user).to respond_to(:authenticate) }
-  # it { expect(@user).to respond_to(:remember_token) }
+  it { expect(@user).to respond_to(:admin) }
+  it { expect(@user).to respond_to(:remember_token) }
 
   it { expect(@user).to be_valid }
+  it { expect(@user).to_not be_admin }
+
+  describe "with admin set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:admin)
+    end
+
+    it { expect(@user).to be_admin }
+  end
 
   describe "name is not present" do
     before { @user.name = " " }
