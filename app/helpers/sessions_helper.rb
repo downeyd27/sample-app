@@ -32,6 +32,10 @@ module SessionsHelper
   end
 
   def store_location
-    session[:return_to] = request.url
+    # storing other HTTP verbs may cause
+    # issues with hitting the database more
+    # than wanting to when redirecting back
+    # to stored location
+    session[:return_to] = request.url if request.get?
   end
 end
