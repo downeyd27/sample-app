@@ -12,4 +12,11 @@ RSpec.describe Micropost, type: :model do
 
   it { expect(subject).to respond_to(:content) }
   it { expect(subject).to respond_to(:user_id) }
+
+  it { expect(subject).to be_valid }
+
+  describe "when a user_id is not present" do
+    before { @micropost.user_id = nil }
+    it { expect(subject).to be_invalid }
+  end
 end
