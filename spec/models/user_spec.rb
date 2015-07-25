@@ -126,6 +126,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "with return value of authenticate method" do
+
     before { @user.save }
     let(:found_user) { User.find_by_email(@user.email) }
 
@@ -153,7 +154,7 @@ RSpec.describe User, type: :model do
     # FAULTY
   end
 
-  describe "micropost association" do
+  describe "micropost associations" do
 
     before { @user.save }
     let!(:older_micropost) do
@@ -164,6 +165,16 @@ RSpec.describe User, type: :model do
     end
     it "should have the right micropost in the right order" do
       expect(@user.microposts).to eq [new_micropost, older_micropost]
+    end
+
+    it "should destroy associated microposts" do
+      microposts = @user.microposts.dup
+      @user.destroy
+
+      expect(microposts).to_not be_empty
+      microposts.each do |micropost|
+        expect(Micropost.find_by_id(micropost.id)).to be_nil
+      end
     end
   end
 end
