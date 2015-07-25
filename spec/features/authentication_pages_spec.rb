@@ -52,9 +52,22 @@ RSpec.describe "AuthenticationPages", type: :feature do
   describe "authorization" do
 
     describe "for non-signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
 
       it { expect(page).to_not have_link 'Profile'  }
       it { expect(page).to_not have_link 'Settings' }
+      describe "in the Microposts controller" do
+
+        describe "submitting to the create action" do
+          before { page.driver.submit :post, microposts_path, {} }
+          it { expect(page).to redirect_to(signin_path) }
+        end
+
+        describe "submitting to the destroy action" do
+          before { page.driver.submit :delete, micropost_path(FactoryGirl.create(:micropost)), {} }
+          it { expect(page).to redirect_to(signin_path) }
+        end
+      end
 
       describe "when attempting to visit a protected page" do
         before do
