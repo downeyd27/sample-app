@@ -75,7 +75,7 @@ RSpec.describe "AuthenticationPages", type: :feature do
           #
           #
           #
-          # Failing test
+          # FAILING TEST
           describe "when signing in again" do
             before do
               # Allows for Capybara to submit a delete request
@@ -90,7 +90,7 @@ RSpec.describe "AuthenticationPages", type: :feature do
               expect(page).to have_title user.name
             end
           end
-          # Failing Test
+          # FAILING TEST
           #
           #
           #
@@ -143,16 +143,17 @@ RSpec.describe "AuthenticationPages", type: :feature do
         end
         #
         #
-        # error: can't find button 'Create my account'
-        #
-        # describe  "visiting the Users#create action" do
-        #   before do
-        #     visit signup_path
-        #     click_button 'Create my account'
-        #   end
+        # FAILING TEST
+        # error: ELEMENT NOT FOUND. Can't find button 'Create my account'
+        describe  "visiting the Users#create action" do
+          before do
+            visit signup_path
+            click_button 'Create my account'
+          end
 
-        #   it { expect(page).to have_title base_title } # root page
-        # end
+          it { expect(page).to have_title base_title } # root page
+        end
+        # FAILING TEST
         #
         #
       end
