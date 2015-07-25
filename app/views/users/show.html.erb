@@ -1,12 +1,19 @@
 <%= content_for :title do %><%= @user.name %><% end %>
 <div class="row">
   <aside class="debug col-md-4">
-    <section>
     <h1>
       <%= gravatar_for @user %>
       <%= @user.name %>
     </h1>
     <%= @user.name %>, <%= @user.email %>
-    </section>
   </aside>
+  <div class="debug col-md-8">
+    <% if @user.microposts.any? %>
+    <h3>Microposts (<%= @user.microposts.count %></h3>
+      <ol class="microposts">
+        <%= render @microposts %>
+      </ol>
+      <%= will_paginate @microposts, renderer: BootstrapPagination::Rails %>
+    <% end %>
+  </div>
 </div>
