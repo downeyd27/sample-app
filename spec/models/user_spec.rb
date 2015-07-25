@@ -12,22 +12,7 @@
 #  password_confirmation :string
 #  remember_token        :string
 #  admin                 :boolean          default(FALSE)
-#
 
-a# == Schema Information
-#
-# Table name: users
-#
-#  id                    :integer          not null, primary key
-#  name                  :string
-#  email                 :string
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  password_digest       :string
-#  password              :string
-#  password_confirmation :string
-#  remember_token        :string
-#
 
 require 'rails_helper'
 
@@ -48,6 +33,7 @@ RSpec.describe User, type: :model do
   it { expect(@user).to respond_to(:password) }
   it { expect(@user).to respond_to(:password_confirmation) }
   it { expect(@user).to respond_to(:authenticate) }
+  it { expect(@user).to respond_to(:microposts) }
   it { expect(@user).to respond_to(:admin) }
   it { expect(@user).to respond_to(:remember_token) }
 
