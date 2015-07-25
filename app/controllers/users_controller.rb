@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include ApplicationHelper
+
   before_filter :signed_in_user, only: [:index, :edit, :update, :delete]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,   only: [:delete]
@@ -47,7 +48,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      status = 201
+      status = 200
       flash[:success] = "Profile updated"
       sign_in @user
       redirect_to @user
@@ -60,10 +61,17 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    # Need to write tests
-    flash[:success] = "user destroyed."
-    redirect_to users_url
+    if User.find(params[:id]).destroy
+      status = 200
+      # Need to write tests
+      flash[:success] = "User deleted"
+      redirect_to users_url
+    else
+      status = 400
+      # Need to write tests
+      flash[:error] = "User was NOT deleted"
+      redirect_to users_url
+    end
   end
 
   private
