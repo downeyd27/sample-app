@@ -163,7 +163,7 @@ RSpec.describe User, type: :model do
     let!(:new_micropost) do
       FactoryGirl.create(:micropost, user: @user, created_at: 1.hour.ago)
     end
-    it "should have the right micropost in the right order" do
+    it "should have the right microposts in the right order" do
       expect(@user.microposts).to eq [new_micropost, older_micropost]
     end
 
@@ -171,7 +171,7 @@ RSpec.describe User, type: :model do
       microposts = @user.microposts.dup
       @user.destroy
 
-      expect(microposts).to_not be_empty
+      expect(microposts).to be_empty
       microposts.each do |micropost|
         expect(Micropost.find_by_id(micropost.id)).to be_nil
       end
