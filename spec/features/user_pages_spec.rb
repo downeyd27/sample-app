@@ -71,7 +71,7 @@ RSpec.describe "User pages", type: :feature do
 
           before { click_button submit }
 
-          it { expect(page).to have_title 'Sign Up' }
+          it { expect(page).to have_title 'Sign up' }
           it { expect(page).to have_content('error') }
         end
       end
@@ -100,8 +100,8 @@ RSpec.describe "User pages", type: :feature do
         end
       end
 
-      it { expect(page).to have_title 'Sign Up'}
-      it { expect(page).to have_selector('h1', text: 'Sign Up')}
+      it { expect(page).to have_title 'Sign up'}
+      it { expect(page).to have_selector('h1', text: 'Sign up')}
     end
   end
 
