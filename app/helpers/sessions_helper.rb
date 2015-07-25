@@ -10,6 +10,11 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def signed_in_user
+    store_location
+    redirect_to signin_url, notice: "Please sign in." unless signed_in?
+  end
+
   def current_user=(user)
     @current_user = user
   end
@@ -32,7 +37,7 @@ module SessionsHelper
   end
 
   def store_location
-    # storing other HTTP verbs may cause
+    # storing HTTP verbs other than GET may cause
     # issues with hitting the database more
     # than wanting to when redirecting back
     # to stored location
