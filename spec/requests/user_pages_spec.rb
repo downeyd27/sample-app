@@ -48,9 +48,10 @@ RSpec.describe "UserPages", type: :request do
     end
   end
 
-  describe "DELETE user" do
+  describe "authorization" do
 
-    describe "authorization" do
+    describe "DELETE user" do
+
       #
       # TEST NOT WORKING BECAUSE 'NO ROUTE MATCHES USERS.512'
       #
@@ -63,6 +64,19 @@ RSpec.describe "UserPages", type: :request do
         describe "submitting a DELETE requesst to the Users#destroy action" do
           before { delete users_path(user) }
           it { expect(response).to redirect_to root_url }
+        end
+      end
+
+      describe "in the Microposts controller" do
+
+        describe "submitting to the create action" do
+          before { post microposts_path }
+          it { expect(response).to redirect_to(signin_path) }
+        end
+
+        describe "submitting to the destroy action" do
+          before { delete micropost_path(FactoryGirl.create(:micropost)), {} }
+          it { expect(response).to redirect_to(signin_path) }
         end
       end
     end
