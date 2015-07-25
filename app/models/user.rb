@@ -17,6 +17,7 @@
 class User < ActiveRecord::Base
   # downcase email before saving because not all database adapters use case-sensitive indices
   has_secure_password
+  has_many :microposts
 
   before_save { email.downcase! }
   before_save :create_remember_token
