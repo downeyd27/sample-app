@@ -11,6 +11,7 @@
 #  password              :string
 #  password_confirmation :string
 #  remember_token        :string
+#  admin                 :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
