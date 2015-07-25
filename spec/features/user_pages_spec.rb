@@ -159,4 +159,20 @@ RSpec.describe "User pages", type: :feature do
       specify { expect(user.email).to eq new_email }
     end
   end
+
+  describe "profile page" do
+    let(:user) { FactoryGirl.create(:user) }
+    let!(:micro_1) { FactoryGirl.create(:micropost, user: user, content: "Foo") }
+    let!(:micro_2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
+    before { visit user_path(user) }
+
+    it { expect(page).to have_title user.name }
+    it { expect(page).to have_selector('h1', text: user.name) }
+
+    describe "microposts" do
+      it { expect(page).to have_content micro_1.content }
+      it { expect(page).to have_content micro_2.content }
+      it { expect(page).to have_content user.microposts.count }
+    end
+  end
 end
