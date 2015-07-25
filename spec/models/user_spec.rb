@@ -123,7 +123,7 @@ RSpec.describe User, type: :model do
     it { expect(@user).to be_invalid}
   end
 
-  describe "return value of authenticate method" do
+  describe "with return value of authenticate method" do
     before { @user.save }
     let(:found_user) { User.find_by_email(@user.email) }
 
@@ -138,7 +138,7 @@ RSpec.describe User, type: :model do
       specify { expect(user_for_invalid_password).to be_falsey }
     end
 
-    describe "remember token" do
+    describe "with remember token" do
       let(:user) { FactoryGirl.create(:user) }
       before { user.save }
   # I think this test is faulty.  It passes even before factory girl had field for remember_token
