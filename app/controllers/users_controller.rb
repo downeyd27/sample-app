@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   include ApplicationHelper
 
   before_filter :signed_in_user, only: [:index, :edit, :update, :delete]
