@@ -4,7 +4,7 @@ RSpec.describe Micropost, type: :model do
 
   let(:user) { FactoryGirl.create(:user) }
   before do
-    # this code is wrong
+    # wrong
     @micropost = Micropost.new(content: "Lorem ipsum", user_id: user.id)
   end
 
@@ -12,11 +12,32 @@ RSpec.describe Micropost, type: :model do
 
   it { expect(subject).to respond_to(:content) }
   it { expect(subject).to respond_to(:user_id) }
+  it { expect(subject).to respond_to(:user) }
+  # its
 
   it { expect(subject).to be_valid }
 
   describe "when a user_id is not present" do
-    before { @micropost.user_id = nil }
+    before { subject.user_id = nil }
     it { expect(subject).to be_invalid }
+  end
+  #
+  #
+  #
+  # Failing Test
+  describe "accessible attributes" do
+    it "should not allow access to user_id" do
+      expect do
+        Micropost.new(user_id: user.id)
+      end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+    end
+  end
+  # Failing Test
+  #
+  #
+  #
+  describe  "when a user_id is present" do
+    before { subject.user_id = nil }
+    it { expect(subject).to_not be_valid }
   end
 end
