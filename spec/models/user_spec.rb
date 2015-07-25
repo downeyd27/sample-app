@@ -152,4 +152,18 @@ RSpec.describe User, type: :model do
     end
     # FAULTY
   end
+
+  describe "micropost association" do
+
+    before { @user.save }
+    let!(:older_micropost) do
+      FactoryGirl.create(:micropost, user: @user, created_at: 1.day.ago)
+    end
+    let!(:new_micropost) do
+      FactoryGirl.create(:micropost, user: @user, created_at: 1.hour.ago)
+    end
+    it "should have the right micropost in the right order" do
+      expect(@user.microposts).to eq [new_micropost, older_micropost]
+    end
+  end
 end
