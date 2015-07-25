@@ -20,8 +20,8 @@ RSpec.describe "StaticPages", type: :feature do
     click_link "logo"
     expect(page).to have_title full_title('')
 
-    click_link "Sign Up"
-    expect(page).to have_title full_title('Sign Up')
+    click_link "Sign up"
+    expect(page).to have_title full_title('Sign up')
   end
 
   shared_examples_for "all static pages" do
