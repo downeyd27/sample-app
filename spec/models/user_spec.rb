@@ -123,7 +123,7 @@ RSpec.describe User, type: :model do
     it { expect(@user).to be_invalid}
   end
 
-  describe "return value of authenticate method" do
+  describe "with return value of authenticate method" do
     before { @user.save }
     let(:found_user) { User.find_by_email(@user.email) }
 
@@ -138,14 +138,16 @@ RSpec.describe User, type: :model do
       specify { expect(user_for_invalid_password).to be_falsey }
     end
 
-    describe "remember token" do
+    # I think this test is faulty.  It passes even before factory girl had field for remember_token
+    # and when commenting out @user at top before usering factory girl. Also, after commenting out
+    # the callback in the user model the test passes.
+    # Failed test (changing to_not into to) does show "Test Token" is being tested.
+    # FAULTY
+    describe "with remember token" do
       let(:user) { FactoryGirl.create(:user) }
       before { user.save }
-  # I think this test is faulty.  It passes even before factory girl had field for remember_token
-  # and when commenting out @user at top before usering factory girl. Also, after commenting out
-  # the callback in the user model the test passes.
-  # Failed test (changing to_not into to) does show "Test Token" is being tested.
       it { expect(user.remember_token).to_not be_empty }
     end
+    # FAULTY
   end
 end

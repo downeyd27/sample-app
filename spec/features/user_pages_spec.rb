@@ -6,6 +6,7 @@ RSpec.describe "User pages", type: :feature do
   let(:user) { FactoryGirl.create(:user) }
 
   describe "index" do
+
     let(:user) { FactoryGirl.create(:user) }
 
     before(:each) do
@@ -29,36 +30,28 @@ RSpec.describe "User pages", type: :feature do
         end
       end
     end
-    #
-    #
-    #
-    # Left off on delete links.... something is broken. expecting key
-    #
-    #
-    #
-    #
-    #
-    # describe "delete links" do
 
-    #   it { expect(page).to_not have_link 'delete' }
+    describe "delete links" do
 
-    #   describe "as an admin user" do
+      it { expect(page).to_not have_link('delete') }
 
-    #     let(:admin) { FactoryGirl.create(:admin) }
-    #     before do
-    #       sign_in admin
-    #       visit users_path
-    #     end
+      describe "as an admin user" do
 
-    #     it { expect(page).to have_link('delete', href: user_path(User.first)) }
+        let(:admin) { FactoryGirl.create(:admin) }
+        before do
+          sign_in admin
+          visit users_path
+        end
 
-    #     it "should be able to delete another user" do
-    #       expect { click_link('delete') }.to change(User, :count).by(-1) }
-    #     end
+        it { expect(page).to have_link('delete', href: user_path(User.first)) }
 
-    #     it { expect(page).not_to have_link('delete', href: user_path(admin)) }
-    #   end
-    # end
+        it "should be able to delete another user" do
+          expect { click_link('delete') }.to change(User, :count).by(-1)
+        end
+
+        it { expect(page).not_to have_link('delete', href: user_path(admin)) }
+      end
+    end
   end
 
   describe "signup" do
@@ -78,7 +71,7 @@ RSpec.describe "User pages", type: :feature do
 
           before { click_button submit }
 
-          it { expect(page).to have_title 'Sign Up' }
+          it { expect(page).to have_title 'Sign up' }
           it { expect(page).to have_content('error') }
         end
       end
@@ -107,8 +100,8 @@ RSpec.describe "User pages", type: :feature do
         end
       end
 
-      it { expect(page).to have_title 'Sign Up'}
-      it { expect(page).to have_selector('h1', text: 'Sign Up')}
+      it { expect(page).to have_title 'Sign up'}
+      it { expect(page).to have_selector('h1', text: 'Sign up')}
     end
   end
 

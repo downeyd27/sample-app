@@ -1,0 +1,17 @@
+<%= render 'shared/error_messages' %>
+  <div class="form_group">
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: "e.g. Bob Loblaw", class:"form-control" %>
+  </div>
+  <div class="form_group">
+    <%= f.label :email %>
+    <%= f.text_field :email, placeholder: "e.g. BobLoblaw@gmail.com", class:"form-control" %>
+  </div>
+  <div class="form_group">
+    <%= f.label :password %>
+    <%= f.password_field :password, placeholder:"password must be longer than 6 characters", class:"form-control" %>
+  </div>
+  <div class="form_group">
+    <%= f.label :password_confirmation, "Confirm Password" %>
+    <%= f.password_field :password_confirmation, placeholder:"password must be longer than 6 characters", class:"form-control" %>
+  </div>

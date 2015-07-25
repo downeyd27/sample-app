@@ -37,14 +37,33 @@ RSpec.describe "UserPages", type: :request do
         it { expect(response).to redirect_to(signin_path) }
       end
       #
-      # TEST NOT WORKING BECAUSE SIGN_IN METHOD HAS VISIT METHOD
-      # CAPYBARA DOESN'T WORK IN RSPEC TYPE: :REQUEST
+      # TEST NOT WORKING BECAUSE 'NO ROUTE MATCHES USERS/512/EDIT'
       #
       describe "as a wrong user submitting a PUT request to the Users#update action" do
         let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
         before { sign_in user, no_capybara: true }
         before { put edit_user_path(wrong_user) }
         it { expects(response).to redirect_to(root_url) }
+      end
+    end
+  end
+
+  describe "DELETE user" do
+
+    describe "authorization" do
+      #
+      # TEST NOT WORKING BECAUSE 'NO ROUTE MATCHES USERS.512'
+      #
+      describe "as non-admin user" do
+        let(:user) { FactoryGirl.create(:user) }
+        let(:non_admin) { FactoryGirl.create(:user) }
+
+        before { sign_in non_admin, no_capybara: true }
+
+        describe "submitting a DELETE requesst to the Users#destroy action" do
+          before { delete users_path(user) }
+          it { expect(response).to redirect_to root_url }
+        end
       end
     end
   end

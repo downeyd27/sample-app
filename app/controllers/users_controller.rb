@@ -1,14 +1,20 @@
 class UsersController < ApplicationController
   include ApplicationHelper
-  before_filter :signed_in_user, only: [:index, :edit, :update]
+
+  before_filter :signed_in_user, only: [:index, :edit, :update, :delete]
   before_filter :correct_user,   only: [:edit, :update]
+  before_filter :admin_user,   only: [:delete]
 
   def index
     @users = User.paginate(page: params[:page])
   end
 
   def new
-    @user = User.new
+    if signed_in?
+      redirect_to root_url
+    else
+      @user = User.new
+    end
   end
 
   def show
@@ -16,19 +22,23 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-
-    if @user.save
-      status = 201
-      sign_in @user
-      # may need to make test for checking if flash success occurs
-      flash[:success] = "Welcome to #{base_title} App!"
-      redirect_to @user
+    if signed_in?
+      redirect_to root_url
     else
-      status = 400
-      # may need to make test for checking if flash error occurs
-      flash[:error] = "Invalid credentials for creating an account!"
-      render 'new'
+      @user = User.new(user_params)
+
+      if @user.save
+        status = 201
+        sign_in @user
+        # may need to make test for checking if flash success occurs
+        flash[:success] = "Welcome to #{base_title} App!"
+        redirect_to @user
+      else
+        status = 400
+        # may need to make test for checking if flash error occurs
+        flash[:error] = "Invalid credentials for creating an account!"
+        render 'new'
+      end
     end
   end
 
@@ -38,14 +48,29 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      status = 201
+      status = 200
       flash[:success] = "Profile updated"
       sign_in @user
       redirect_to @user
     else
       status = 400
-      # flash[:error] = "Invalid user update submission "write tests before uncommenting.
+      # need to write tests
+      flash[:error] = "Invalid user update submission"
       render 'edit'
+    end
+  end
+
+  def destroy
+    if User.find(params[:id]).destroy
+      status = 200
+      # Need to write tests
+      flash[:success] = "User deleted"
+      redirect_to users_url
+    else
+      status = 400
+      # Need to write tests
+      flash[:error] = "User was NOT deleted"
+      redirect_to users_url
     end
   end
 
@@ -63,6 +88,10 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
   # End of private methods.
 end
