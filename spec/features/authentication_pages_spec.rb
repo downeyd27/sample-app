@@ -132,16 +132,20 @@ RSpec.describe "AuthenticationPages", type: :feature do
       before { sign_in user }
 
       describe "in the Users controller" do
-
+        #
+        #
+        # FAILING TEST
+        # error: ELEMENT NOT FOUND. Can't find button 'Sign up'
         describe "visiting the Users#new action" do
 
           before do
-            visit root_url
-            click_link 'Sign up'
+            visit signup_path
+            click_button 'Sign up'
           end
 
           it { expect(page).to have_title base_title } # root page
         end
+        # FAILING TEST
         #
         #
         # FAILING TEST
