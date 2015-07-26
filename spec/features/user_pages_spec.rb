@@ -162,6 +162,7 @@ RSpec.describe "User pages", type: :feature do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
+
     let!(:micro_1) { FactoryGirl.create(:micropost, user: user, content: "Foo") }
     let!(:micro_2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
     before { visit user_path(user) }
@@ -174,25 +175,15 @@ RSpec.describe "User pages", type: :feature do
       it { expect(page).to have_content micro_2.content }
       it { expect(page).to have_content user.microposts.count }
 
-      let(:user) { FactoryGirl.create(:user) }
-      before { user.save }
-
-      let!(:older_micropost) do
-        FactoryGirl.create(:micropost, user: user, created_at: 1.day.ago)
-      end
-
-      let!(:new_micropost) do
-        FactoryGirl.create(:micropost, user: user, created_at: 1.hour.ago)
-      end
-
       describe "association status" do
         let(:unfollowed_post) do
           FactoryGirl.create(:micropost, user: user)
         end
 
-        it { expect(:feed).to have_content(new_micropost.content) }
-        it { expect(:feed).to have_content(older_micropost.content) }
-        it { expect(:feed).to_not have_content(unfollowed_post) }
+        igt { expect(user.feed).to_not have_content(unfollowed_post) }
+# failing tests
+        it { expect(user.feed).to have_content(micro_1.content) }
+        it { expect(user.feed).to have_content(micro_2.content) }
       end
     end
   end
