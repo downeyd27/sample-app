@@ -16,7 +16,7 @@ RSpec.describe Micropost, type: :model do
   let(:user) { FactoryGirl.create(:user) }
   before do
     # wrong
-    @micropost = Micropost.new(content: "Lorem ipsum", user_id: user.id)
+    @micropost = user.microposts.build(content: "Lorem ipsum")
   end
 
   subject { @micropost }
@@ -29,12 +29,22 @@ RSpec.describe Micropost, type: :model do
   it { expect(subject).to be_valid }
 
   describe "when a user_id is not present" do
-    before { subject.user_id = nil }
+    before { @micropost.user_id = nil }
     it { expect(subject).to be_invalid }
   end
 
+  describe "with blank content" do
+    before { @micropost.content = ' ' }
+    it { expect(@micropost).to_not be_valid}
+  end
+
+  describe "with content that is too long" do
+    before { @micropost.content = 'z' * 141 }
+    it { expect(@micropost).to_not be_valid}
+  end
+
   describe  "when a user_id is present" do
-    before { subject.user_id = nil }
-    it { expect(subject).to_not be_valid }
+    before { @micropost.user_id = nil }
+    it { expect(@micropost).to_not be_valid }
   end
 end
