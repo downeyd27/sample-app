@@ -43,7 +43,7 @@ RSpec.describe Micropost, type: :model do
     it { expect(@micropost).to_not be_valid}
   end
 
-  describe  "when a user_id is present" do
+  describe  "when a user_id is not present" do
     before { @micropost.user_id = nil }
     it { expect(@micropost).to_not be_valid }
   end
