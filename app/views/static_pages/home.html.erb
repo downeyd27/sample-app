@@ -1,5 +1,17 @@
-<section class="debug center hero-unit">
-  <h1>Welcome to the Home Page</h1>
-  <p>The Page for starting a new app</p>
-  <%= link_to "Sign up", signup_path, class: "btn btn-primary" %>
-</section>
+<% if signed_in? %>
+  <div class="debug row">
+    <aside class="col-md-4">
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+      <section>
+        <%= render 'shared/micropost_form' %>
+      </section>
+    </aside>
+  </div>
+<% else %>
+  <section class="debug center hero-unit">
+    <h1>Welcome to the Home Page</h1>
+    <%= link_to "Sign up", signup_path, class: "btn btn-primary" %>
+  </section>
+<% end %>
