@@ -6,8 +6,8 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-      sign_in user
       status = 201
+      sign_in user
       flash[:success] = "Valid signin credentials.  You just signed in!"
       redirect_back_or user
     else

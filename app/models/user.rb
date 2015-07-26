@@ -15,10 +15,10 @@
 #
 
 class User < ActiveRecord::Base
-  # downcase email before saving because not all database adapters use case-sensitive indices
   has_secure_password
   has_many :microposts, dependent: :destroy
 
+  # downcase email before saving because not all database adapters use case-sensitive indices
   before_save { email.downcase! }
   before_save :create_remember_token
 
@@ -28,9 +28,15 @@ class User < ActiveRecord::Base
   validates :email, presence: true,
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-
-  validates :password, presence: true, length: { minimum: 6 }
+  # No need to put in presence true for password because password_confirmation
+  # uses has_secure_password to validate presence of password.
+  validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
+  def feed
+    # Preliminary. Not full implementation
+    Micropost.where("user_id = ?", id)
+  end
 
   private
 

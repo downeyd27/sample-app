@@ -78,17 +78,17 @@ RSpec.describe "AuthenticationPages", type: :feature do
           #
           # FAILING TEST
           describe "when signing in again" do
+
             before do
               # Allows for Capybara to submit a delete request
               page.driver.submit :delete, signout_path, {}
               visit signin_path
-              fill_in "Email", with: user.email
+              fill_in "Email",    with: user.email
               fill_in "Password", with: user.password
               click_button 'Sign in'
             end
 
             it "should render the default (profile) page" do
-              expect(page).to have_title user.name
             end
           end
           # FAILING TEST

@@ -173,6 +173,27 @@ RSpec.describe "User pages", type: :feature do
       it { expect(page).to have_content micro_1.content }
       it { expect(page).to have_content micro_2.content }
       it { expect(page).to have_content user.microposts.count }
+
+      let(:user) { FactoryGirl.create(:user) }
+      before { user.save }
+
+      let!(:older_micropost) do
+        FactoryGirl.create(:micropost, user: user, created_at: 1.day.ago)
+      end
+
+      let!(:new_micropost) do
+        FactoryGirl.create(:micropost, user: user, created_at: 1.hour.ago)
+      end
+
+      describe "association status" do
+        let(:unfollowed_post) do
+          FactoryGirl.create(:micropost, user: user)
+        end
+
+        it { expect(:feed).to have_content(new_micropost.content) }
+        it { expect(:feed).to have_content(older_micropost.content) }
+        it { expect(:feed).to_not have_content(unfollowed_post) }
+      end
     end
   end
 end

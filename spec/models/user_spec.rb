@@ -34,6 +34,7 @@ RSpec.describe User, type: :model do
   it { expect(@user).to respond_to(:password_confirmation) }
   it { expect(@user).to respond_to(:authenticate) }
   it { expect(@user).to respond_to(:microposts) }
+  it { expect(@user).to respond_to(:feed) }
   it { expect(@user).to respond_to(:admin) }
   it { expect(@user).to respond_to(:remember_token) }
 
@@ -157,12 +158,14 @@ RSpec.describe User, type: :model do
   describe "micropost associations" do
 
     before { @user.save }
+
     let!(:older_micropost) do
       FactoryGirl.create(:micropost, user: @user, created_at: 1.day.ago)
     end
     let!(:new_micropost) do
       FactoryGirl.create(:micropost, user: @user, created_at: 1.hour.ago)
     end
+
     it "should have the right microposts in the right order" do
       expect(@user.microposts).to eq [new_micropost, older_micropost]
     end
@@ -176,5 +179,15 @@ RSpec.describe User, type: :model do
         expect(Micropost.find_by_id(micropost.id)).to be_nil
       end
     end
+
+    # describe "micropost association status" do
+    #   let(:unfollowed_post) do
+    #     FactoryGirl.create(:micropost, FactoryGirl.create(:user))
+    #   end
+
+    #   its(:feed) { expect(page).to include(newer_micropost) }
+    #   its(:feed) { expect(page).to include(older_micropost) }
+    #   its(:feed) { expect(page).to_not include(unfollowed_post) }
+    # end
   end
 end

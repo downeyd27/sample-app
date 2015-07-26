@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :feature do
 
+  subject { page }
+
   it "should have the right links on the layout" do
     visit root_path
 
@@ -35,7 +37,23 @@ RSpec.describe "StaticPages", type: :feature do
     let(:page_title) { '' }
 
     it_should_behave_like 'all static pages'
-    it { expect(page).to_not have_title '| Home'}
+    it { expect(page).to_not have_title '| Home' }
+
+    describe "for signed-in-users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+        FactoryGirl.create(:micropost, user: user, content: "Dol or sit amet")
+        sign_in user
+        visit root_path
+      end
+
+      it "should render the user's feed" do
+        user.feed.each do |item|
+          expect(page).to have_selector("li##{item.id}", text: item.content)
+        end
+      end
+    end
   end
 
   describe "Help Page" do

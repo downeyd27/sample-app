@@ -13,6 +13,7 @@ class MicropostsController < ApplicationController
       status = 400
       # need to write test for flash
       flash[:error] = "Micropost NOT created!"
+      @feed_items = []
       render 'static_pages/home'
     end
   end

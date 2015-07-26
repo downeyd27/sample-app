@@ -1,0 +1,7 @@
+<% if @feed_items.any? %>
+  <ol class="microposts">
+    <!-- need to specify render partial: when sending a collection: -->
+    <%= render partial: 'shared/feed_item', collection: @feed_item %>
+  </ol>
+  <%= will_paginate @feed_items, renderer: BootstrapPagination::Rails  %>
+<% end %>

@@ -42,8 +42,8 @@ RSpec.describe "UserPages", type: :request do
       describe "as a wrong user submitting a PUT request to the Users#update action" do
         let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
         before { sign_in user, no_capybara: true }
-        before { put edit_user_path(wrong_user) }
-        it { expects(response).to redirect_to(root_url) }
+        before { put user_path(wrong_user) }
+        it { expect(response).to redirect_to(root_url) }
       end
     end
   end
@@ -52,9 +52,6 @@ RSpec.describe "UserPages", type: :request do
 
     describe "DELETE user" do
 
-      #
-      # TEST NOT WORKING BECAUSE 'NO ROUTE MATCHES USERS.512'
-      #
       describe "as non-admin user" do
         let(:user) { FactoryGirl.create(:user) }
         let(:non_admin) { FactoryGirl.create(:user) }
@@ -62,7 +59,7 @@ RSpec.describe "UserPages", type: :request do
         before { sign_in non_admin, no_capybara: true }
 
         describe "submitting a DELETE requesst to the Users#destroy action" do
-          before { delete users_path(user) }
+          before { delete user_path(user) }
           it { expect(response).to redirect_to root_url }
         end
       end

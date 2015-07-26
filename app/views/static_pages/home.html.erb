@@ -8,10 +8,14 @@
         <%= render 'shared/micropost_form' %>
       </section>
     </aside>
+    <div class="debug col-md-8">
+      <h3>Micropost Feed</h3>
+      <%= render 'shared/feed' %>
+    </div>
   </div>
 <% else %>
   <section class="debug center hero-unit">
     <h1>Welcome to the Home Page</h1>
-    <%= link_to "Sign up", signup_path, class: "btn btn-primary" %>
+    <%= link_to "Sign up", signup_path, class:"btn btn-primary" %>
   </section>
 <% end %>
