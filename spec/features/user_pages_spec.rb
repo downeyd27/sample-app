@@ -180,7 +180,7 @@ RSpec.describe "User pages", type: :feature do
           FactoryGirl.create(:micropost, user: user)
         end
 
-        igt { expect(user.feed).to_not have_content(unfollowed_post) }
+        it { expect(user.feed).to_not have_content(unfollowed_post) }
 # failing tests
         it { expect(user.feed).to have_content(micro_1.content) }
         it { expect(user.feed).to have_content(micro_2.content) }
