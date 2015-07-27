@@ -35,6 +35,7 @@ RSpec.describe User, type: :model do
   it { expect(@user).to respond_to(:authenticate) }
   it { expect(@user).to respond_to(:microposts) }
   it { expect(@user).to respond_to(:feed) }
+  it { expect(@user).to respond_to(:relationships) }
   it { expect(@user).to respond_to(:admin) }
   it { expect(@user).to respond_to(:remember_token) }
 
