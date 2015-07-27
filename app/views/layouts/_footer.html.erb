@@ -2,9 +2,11 @@
   <h1 class="sr-only">Footer</h1>
   <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
     <h1 class="sr-only">Footer Navigation</h1>
-    <small>
+    <!-- Image isn't displayed in production on heroku. -->
+    <!-- replaced small tag with figure tag to test on heroku -->
+    <figure>
       <%= link_to image_tag("rails-logo-35x45.jpeg", size: "35x45", alt: "Rails"), root_path %>
-    </small>
+    </figure>
     <ul class="list-inline pull-right">
       <li><%= link_to "About", about_path %></li>
       <li><%= link_to "Contact", contact_path %></li>
