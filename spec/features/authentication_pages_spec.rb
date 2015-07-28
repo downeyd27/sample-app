@@ -112,6 +112,16 @@ RSpec.describe "AuthenticationPages", type: :feature do
 
           it { expect(page).to have_title 'Sign in' }
         end
+
+        describe "visiting the following page" do
+          before { visit following_user_path(user) }
+          it { expect(page).to have_title 'Sign in' }
+        end
+
+        describe "visiting the followers page" do
+          before { visit followers_user_path(user) }
+          it { expect(page).to have_title 'Sign in' }
+        end
       end
     end
 

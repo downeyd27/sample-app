@@ -11,7 +11,7 @@
 
 require 'rails_helper'
 
-RSpec.describe "Relationship", type: :model do
+RSpec.describe Relationship, type: :model do
 
   let(:follower) { FactoryGirl.create(:user) }
   let(:followed) { FactoryGirl.create(:user) }
@@ -27,5 +27,15 @@ RSpec.describe "Relationship", type: :model do
     # 2 Failing tests
     its(:follower) { expect(relationship.follower).to eq follower }
     its(:followed) { expect(relationship.followed).to eq followed }
+  end
+
+  describe "when followed id is not present" do
+      before { relationship.followed_id = nil }
+      it { expect(relationship).to_not be_valid }
+    end
+
+  describe "when follower id is not present" do
+    before { relationship.follower_id = nil }
+    it { expect(relationship).to_not be_valid }
   end
 end

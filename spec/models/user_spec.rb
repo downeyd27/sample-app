@@ -36,6 +36,12 @@ RSpec.describe User, type: :model do
   it { expect(@user).to respond_to(:microposts) }
   it { expect(@user).to respond_to(:feed) }
   it { expect(@user).to respond_to(:relationships) }
+  it { expect(@user).to respond_to(:followed_users) }
+  it { expect(@user).to respond_to(:reverse_relationships) }
+  it { expect(@user).to respond_to(:followers) }
+  it { expect(@user).to respond_to(:following?) }
+  it { expect(@user).to respond_to(:follow!) }
+  it { expect(@user).to respond_to(:unfollow!) }
   it { expect(@user).to respond_to(:admin) }
   it { expect(@user).to respond_to(:remember_token) }
 
@@ -190,5 +196,37 @@ RSpec.describe User, type: :model do
     #   its(:feed) { expect(page).to include(older_micropost) }
     #   its(:feed) { expect(page).to_not include(unfollowed_post) }
     # end
+  end
+
+  describe "following" do
+    let(:other_user) { FactoryGirl.create(:user) }
+    before do
+      @user.save
+      @user.follow!(other_user)
+    end
+
+    it { expect(@user).to be_following(other_user) }
+
+    # Failing test, but believe to be with how the test is written.
+    it { expect(@user.followed_users).to include(other_user.id) }
+    #
+    # Failing test
+    #
+    # Failing test
+    describe "followed user" do
+      it { expect(other_user.followed_users).to include(@user.id) }
+    end
+    # Failing test
+    #
+
+    describe "and unfollowing" do
+     before { @user.unfollow!(other_user) }
+
+     it { expect(@user).to_not be_following(other_user) }
+      # Failing test, but believe to be with how the test is written.
+     it { expect(@user.followed_users).to_not include(other_user.id) }
+    end
+
+
   end
 end
