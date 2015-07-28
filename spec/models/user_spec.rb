@@ -27,26 +27,28 @@ RSpec.describe User, type: :model do
     )
   end
 
-  it { expect(@user).to respond_to(:name) }
-  it { expect(@user).to respond_to(:email) }
-  it { expect(@user).to respond_to(:password_digest) }
-  it { expect(@user).to respond_to(:password) }
-  it { expect(@user).to respond_to(:password_confirmation) }
-  it { expect(@user).to respond_to(:authenticate) }
-  it { expect(@user).to respond_to(:microposts) }
-  it { expect(@user).to respond_to(:feed) }
-  it { expect(@user).to respond_to(:relationships) }
-  it { expect(@user).to respond_to(:followed_users) }
-  it { expect(@user).to respond_to(:reverse_relationships) }
-  it { expect(@user).to respond_to(:followers) }
-  it { expect(@user).to respond_to(:following?) }
-  it { expect(@user).to respond_to(:follow!) }
-  it { expect(@user).to respond_to(:unfollow!) }
-  it { expect(@user).to respond_to(:admin) }
-  it { expect(@user).to respond_to(:remember_token) }
+  subject { @user }
 
-  it { expect(@user).to be_valid }
-  it { expect(@user).to_not be_admin }
+  it { should respond_to(:name) }
+  it { should respond_to(:email) }
+  it { should respond_to(:password_digest) }
+  it { should respond_to(:password) }
+  it { should respond_to(:password_confirmation) }
+  it { should respond_to(:authenticate) }
+  it { should respond_to(:microposts) }
+  it { should respond_to(:feed) }
+  it { should respond_to(:relationships) }
+  it { should respond_to(:followed_users) }
+  it { should respond_to(:reverse_relationships) }
+  it { should respond_to(:followers) }
+  it { should respond_to(:following?) }
+  it { should respond_to(:follow!) }
+  it { should respond_to(:unfollow!) }
+  it { should respond_to(:admin) }
+  it { should respond_to(:remember_token) }
+
+  it { should be_valid }
+  it { should_not be_admin }
 
   describe "with admin set to 'true'" do
     before do
@@ -205,28 +207,19 @@ RSpec.describe User, type: :model do
       @user.follow!(other_user)
     end
 
-    it { expect(@user).to be_following(other_user) }
+    it { should be_following(other_user) }
+    its(:followed_users) { should include(other_user) }
 
-    # Failing test, but believe to be with how the test is written.
-    it { expect(@user.followed_users).to include(other_user.id) }
-    #
-    # Failing test
-    #
-    # Failing test
     describe "followed user" do
-      it { expect(other_user.followed_users).to include(@user.id) }
+      subject { other_user }
+      its(:followers) { should include(@user) }
     end
-    # Failing test
-    #
 
     describe "and unfollowing" do
      before { @user.unfollow!(other_user) }
 
-     it { expect(@user).to_not be_following(other_user) }
-      # Failing test, but believe to be with how the test is written.
-     it { expect(@user.followed_users).to_not include(other_user.id) }
+     it { should_not be_following(other_user) }
+      its(:followed_users) { should_not include(other_user) }
     end
-
-
   end
 end

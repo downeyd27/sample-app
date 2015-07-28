@@ -25,17 +25,17 @@ RSpec.describe Relationship, type: :model do
     it { expect(relationship).to respond_to(:follower) }
     it { expect(relationship).to respond_to(:followed) }
     # 2 Failing tests
-    its(:follower) { expect(relationship.follower).to eq follower }
-    its(:followed) { expect(relationship.followed).to eq followed }
+    its(:follower) { should eq follower }
+    its(:followed) { should eq followed }
   end
 
   describe "when followed id is not present" do
       before { relationship.followed_id = nil }
-      it { expect(relationship).to_not be_valid }
+      it { should_not be_valid }
     end
 
   describe "when follower id is not present" do
     before { relationship.follower_id = nil }
-    it { expect(relationship).to_not be_valid }
+    it { should_not be_valid }
   end
 end

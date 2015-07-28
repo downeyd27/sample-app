@@ -4,8 +4,6 @@ def sign_in(user, options={})
   if options[:no_capybara]
     #Sign in when not using Capybara.
 
-    # COMMENT COOKIES BACK IN BEFORE PRODUCTION AND DEVELOPEMENT.
-
     # Test suite doesn't recognize method cookie.
     cookies[:remember_token] = user.remember_token
   else

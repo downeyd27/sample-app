@@ -106,7 +106,7 @@ RSpec.describe "User pages", type: :feature do
   end
 
   describe "profile" do
-
+    let(:user) { FactoryGirl.create(:user) }
     before { visit user_path(user) }
 
     describe "page" do
@@ -189,6 +189,7 @@ RSpec.describe "User pages", type: :feature do
     end
 
     describe "follow/unfollow buttons" do
+      let(:user) { FactoryGirl.create(:user) }
       let(:other_user) { FactoryGirl.create(:user) }
       before { sign_in user }
 
@@ -209,7 +210,7 @@ RSpec.describe "User pages", type: :feature do
 
         describe "toggling the button" do
           before { click_button "Follow" }
-          it { should have_selector('input', value: 'Unfollow') }
+          it { expect(page).to have_xpath("//input[@value='Unfollow'") }
         end
       end
 
@@ -233,7 +234,7 @@ RSpec.describe "User pages", type: :feature do
 
         describe "toggling the button" do
           before { click_button "Unfollow" }
-          it { should have_selector('input', value: 'Follow') }
+          it { expect(page).to have_xpath("//input[@value='Follow'") }
         end
       end
     end
