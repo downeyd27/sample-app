@@ -8,18 +8,18 @@ This project was intended for me to further learn how to properly sign in a user
 
 ## Setting up Environment
 
-Ruby 2.0.0
-Rails 4.2.3
+- Ruby 2.0.0
+- Rails 4.2.3
 # Gems
 
-will_paginate
-Capybara
-shoulda-matchers
-bootstrap-sass
-factory_girl_rails
-pry-rails
-rails_layout
-annotate
+- will_paginate
+- Capybara
+- shoulda-matchers
+- bootstrap-sass
+- factory_girl_rails
+- pry-rails
+- rails_layout
+- annotate
 
 ## How to use
 
