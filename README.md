@@ -1,5 +1,3 @@
-# README
-
 ## Synopsis
 This project is intended to be a simple replication of twitter.  You have the ability to make create an account where you can sign in and sign out with proper authentication and authorization.  You can also create "microposts", follow and unfollow other users, change a gravatar profile photo and view a feed of the posts of those who you follow.
 
